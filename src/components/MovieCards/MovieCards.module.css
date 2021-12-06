@@ -1,0 +1,6 @@
+.MovieCardsContainer {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}

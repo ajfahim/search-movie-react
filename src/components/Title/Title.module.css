@@ -1,0 +1,10 @@
+.titleContainer {
+  display: flex;
+  justify-content: center;
+}
+.title {
+  padding: 0.5rem;
+  font-size: 5rem;
+  font-family: "Courier New", Courier;
+  color: cadetblue;
+}

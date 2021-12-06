@@ -1,0 +1,19 @@
+.inputContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  width: 50vw;
+  height: 5rem;
+  border: none;
+  border-bottom: 0.3rem solid cadetblue;
+  font-size: 2rem;
+  color: #834f89;
+  background-color: bisque;
+  padding: 1rem;
+  font-family: monospace;
+}
+.input:focus {
+  outline: none;
+}
