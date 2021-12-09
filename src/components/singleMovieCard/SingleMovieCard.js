@@ -1,36 +1,33 @@
-import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./SingleMovieCard.module.css";
 
-const SingleMovieCard = ({ movieData }) => {
+const SingleMovieCard = () => {
+  const [datas, setDatas] = useState([]);
   useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://imdb8.p.rapidapi.com/title/get-details",
-      params: { tconst: "tt0944947" },
-      headers: {
-        "x-rapidapi-host": "imdb8.p.rapidapi.com",
-        "x-rapidapi-key": "8499f091d8mshdd21fe07f3bf67dp15d89cjsnfedaf3b878b6",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
+    fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=672b7e2942135d80371840ef82c5fc3f"
+    )
+      .then((res) => {
+        return res.json();
       })
-      .catch(function (error) {
-        console.error(error);
+      .then((data) => {
+        console.log(data.results);
+        setDatas(data.results);
       });
   }, []);
-
-  return (
-    <div className={styles.cardContainer}>
-      <img src="" alt="" />
-      <h3 className={styles.title}>{movieData}</h3>
-      <span className={styles.ratting}>ratting</span>
-      <p className={styles.description}>description</p>
-    </div>
-  );
+  console.log("from outside: ", datas);
+  return datas.map((data) => {
+    return (
+      <div key={data.id} className={styles.cardContainer}>
+        <img
+          src={`http://image.tmdb.org/t/p/original${data.poster_path}`}
+          alt={data.title}
+        />
+        <h3 className={styles.title}>{data.title}</h3>
+        <span className={styles.ratting}>{data.vote_average}</span>
+        <p className={styles.description}>{data.overview}</p>
+      </div>
+    );
+  });
 };
 export default SingleMovieCard;
