@@ -2,5 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px rgb(0, 0, 0) solid;
+
+  border: 0.3rem cadetblue solid;
+}
+.cardContainer > img {
+  height: 100%;
+  width: 100%;
 }
