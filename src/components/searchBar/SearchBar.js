@@ -8,7 +8,7 @@ const SearchBar = () => {
   const updateData = (e) => {
     setFilteredData(e.target.value);
   };
-
+  console.log(filteredData);
   return (
     <div className={styles.inputContainer}>
       <form>

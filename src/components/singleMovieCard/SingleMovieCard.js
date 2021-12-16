@@ -3,8 +3,10 @@ import { MovieContext } from "../../contexts/movieContext";
 import styles from "./SingleMovieCard.module.css";
 
 const SingleMovieCard = () => {
-  const { data } = useContext(MovieContext);
+  const { data, filteredDatas } = useContext(MovieContext);
   const [datas, setDatas] = data;
+  const [filteredData] = filteredDatas;
+
   useEffect(() => {
     fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=672b7e2942135d80371840ef82c5fc3f"
@@ -13,27 +15,28 @@ const SingleMovieCard = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.results);
+        console.log(data);
         setDatas(data.results);
       });
-  }, []);
-  console.log("from outside: ", datas);
+  }, [setDatas]);
 
-  return datas.map((data) => {
-    return (
-      <div key={data.id} className={styles.cardContainer}>
-        <img
-          src={`http://image.tmdb.org/t/p/original${data.poster_path}`}
-          alt={data.title}
-        />
-        <h3 className={styles.title}>{data.title}</h3>
-        <span className={styles.ratting}>
-          <span>Ratting:</span>
-          {data.vote_average}
-        </span>
-        <p className={styles.description}>{data.overview}</p>
-      </div>
-    );
-  });
+  if (filteredData === "") {
+    return datas.map((data) => {
+      return (
+        <div key={data.id} className={styles.cardContainer}>
+          <img
+            src={`http://image.tmdb.org/t/p/original${data.poster_path}`}
+            alt={data.title}
+          />
+          <h3 className={styles.title}>{data.title}</h3>
+          <span className={styles.ratting}>
+            <span>Ratting:</span>
+            {data.vote_average}
+          </span>
+          <p className={styles.description}>{data.overview}</p>
+        </div>
+      );
+    });
+  }
 };
 export default SingleMovieCard;
