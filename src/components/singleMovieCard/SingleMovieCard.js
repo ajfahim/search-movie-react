@@ -3,10 +3,9 @@ import { MovieContext } from "../../contexts/movieContext";
 import styles from "./SingleMovieCard.module.css";
 
 const SingleMovieCard = () => {
-  const { data, titles } = useContext(MovieContext);
+  const { data, searchTarms } = useContext(MovieContext);
   const [datas, setDatas] = data;
-  // const [filteredData] = filteredDatas;
-  const [title, setTitle] = titles;
+  const [searchTarm] = searchTarms;
 
   useEffect(() => {
     fetch(
@@ -16,31 +15,48 @@ const SingleMovieCard = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.results);
-        console.log("type of data.result: ", typeof data.results);
         setDatas(data.results);
-        setTitle(datas.map(({ title }) => title));
-        console.log("Title", title);
       });
-  }, []);
-  console.log("data: ", datas);
-  console.log("type of data: ", typeof datas);
+  }, [setDatas]);
 
-  return datas.map((data) => {
-    return (
-      <div key={data.id} className={styles.cardContainer}>
-        <img
-          src={`http://image.tmdb.org/t/p/original${data.poster_path}`}
-          alt={data.title}
-        />
-        <h3 className={styles.title}>{data.title}</h3>
-        <span className={styles.ratting}>
-          <span>Ratting:</span>
-          {data.vote_average}
-        </span>
-        <p className={styles.description}>{data.overview}</p>
-      </div>
-    );
-  });
+  if (searchTarm === "") {
+    return datas.map((data) => {
+      return (
+        <div key={data.id} className={styles.cardContainer}>
+          <img
+            src={`http://image.tmdb.org/t/p/original${data.poster_path}`}
+            alt={data.title}
+          />
+          <h3 className={styles.title}>{data.title}</h3>
+          <span className={styles.ratting}>
+            <span>Ratting:</span>
+            {data.vote_average}
+          </span>
+          <p className={styles.description}>{data.overview}</p>
+        </div>
+      );
+    });
+  } else {
+    return datas
+      .filter((data) =>
+        data.title.toLowerCase().match(searchTarm.toLowerCase())
+      )
+      .map((data) => {
+        return (
+          <div key={data.id} className={styles.cardContainer}>
+            <img
+              src={`http://image.tmdb.org/t/p/original${data.poster_path}`}
+              alt={data.title}
+            />
+            <h3 className={styles.title}>{data.title}</h3>
+            <span className={styles.ratting}>
+              <span>Ratting:</span>
+              {data.vote_average}
+            </span>
+            <p className={styles.description}>{data.overview}</p>
+          </div>
+        );
+      });
+  }
 };
 export default SingleMovieCard;

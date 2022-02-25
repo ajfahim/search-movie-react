@@ -3,17 +3,17 @@ import { MovieContext } from "../../contexts/movieContext";
 import styles from "../searchBar/SearchBar.module.css";
 
 const SearchBar = () => {
-  const { filteredDatas } = useContext(MovieContext);
-  const [filteredData, setFilteredData] = filteredDatas;
+  const { searchTarms } = useContext(MovieContext);
+  const [searchTarm, setSearchTarm] = searchTarms;
   const updateData = (e) => {
-    setFilteredData(e.target.value);
+    setSearchTarm(e.target.value);
   };
-  console.log(filteredData);
+
   return (
     <div className={styles.inputContainer}>
       <form>
         <input
-          value={filteredData}
+          value={searchTarm}
           onChange={updateData}
           type="text"
           className={styles.input}
