@@ -1,17 +1,8 @@
-import { MovieProvider } from "../src/contexts/movieContext";
 import "./App.css";
-import MovieCards from "./components/MovieCards/MovieCards";
-import SearchBar from "./components/searchBar/SearchBar";
-import Title from "./components/Title/Title";
+import MainApp from "./components/App/MainApp";
 
 function App() {
-  return (
-    <MovieProvider>
-      <Title />
-      <SearchBar />
-      <MovieCards />
-    </MovieProvider>
-  );
+  return <MainApp />;
 }
 
 export default App;
