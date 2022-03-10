@@ -1,12 +1,10 @@
-import { useState } from "react";
 import SingleMovieCard from "../singleMovieCard/SingleMovieCard";
 import styles from "./MovieCards.module.css";
 
-const MovieCards = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+const MovieCards = ({ data, searchTerm }) => {
   return (
     <div className={styles.MovieCardsContainer}>
-      <SingleMovieCard />
+      <SingleMovieCard movieData={data} searchTerm={searchTerm} />
     </div>
   );
 };
