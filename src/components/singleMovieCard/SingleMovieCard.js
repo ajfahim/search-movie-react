@@ -23,7 +23,7 @@ const SingleMovieCard = ({ searchTerm, movieData, loading }) => {
   } else {
     return movieData
       .filter((data) =>
-        data.title.toLowerCase().match(searchTerm.toLowerCase())
+        data.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
       .map((data) => {
         return (
