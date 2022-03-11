@@ -5,13 +5,15 @@ import Title from "../Title/Title";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const updateData = (e) => {
+  const getSearchTerm = (e) => {
     setSearchTerm(e.target.value);
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=672b7e2942135d80371840ef82c5fc3f"
     )
@@ -21,14 +23,16 @@ export default function App() {
       .then((data) => {
         setData(data.results);
         console.log("DATA: ", data);
-      });
-  }, [setData]);
+      })
+      .catch((err) => console.log("Errors: ", err))
+      .finally(() => setLoading(false));
+  }, []);
   console.log("data: ", data);
   return (
     <>
       <Title />
-      <SearchBar searchTerm={searchTerm} updateData={updateData} />
-      <MovieCards movieData={data} searchTerm={searchTerm} />
+      <SearchBar searchTerm={searchTerm} updateData={getSearchTerm} />
+      <MovieCards movieData={data} searchTerm={searchTerm} loading={loading} />
     </>
   );
 }

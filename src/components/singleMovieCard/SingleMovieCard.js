@@ -1,7 +1,9 @@
 import styles from "./SingleMovieCard.module.css";
 
-const SingleMovieCard = ({ searchTerm, movieData }) => {
-  if (searchTerm === "") {
+const SingleMovieCard = ({ searchTerm, movieData, loading }) => {
+  if (loading) {
+    return <p>Data is loading...</p>;
+  } else if (searchTerm === "") {
     return movieData.map((data) => {
       return (
         <div key={data.id} className={styles.cardContainer}>
