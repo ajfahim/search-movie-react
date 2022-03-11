@@ -1,12 +1,12 @@
 import styles from "../searchBar/SearchBar.module.css";
 
-const SearchBar = ({ getSearchTerm, searchTerm }) => {
+const SearchBar = ({ handleChange, searchTerm }) => {
   return (
     <div className={styles.inputContainer}>
       <form>
         <input
           value={searchTerm}
-          onChange={getSearchTerm}
+          onChange={handleChange}
           type="text"
           className={styles.input}
           placeholder="Name a movie..."

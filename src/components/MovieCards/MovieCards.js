@@ -1,11 +1,11 @@
 import SingleMovieCard from "../singleMovieCard/SingleMovieCard";
 import styles from "./MovieCards.module.css";
 
-const MovieCards = ({ data, searchTerm, loading }) => {
+const MovieCards = ({ movieData, searchTerm, loading }) => {
   return (
     <div className={styles.MovieCardsContainer}>
       <SingleMovieCard
-        movieData={data}
+        movieData={movieData}
         searchTerm={searchTerm}
         loading={loading}
       />

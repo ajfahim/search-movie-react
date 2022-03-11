@@ -5,10 +5,10 @@ import Title from "../Title/Title";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState([]);
+  const [movieData, setMovieData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getSearchTerm = (e) => {
+  const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
@@ -21,18 +21,22 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
-        setData(data.results);
+        setMovieData(data.results);
         console.log("DATA: ", data);
       })
       .catch((err) => console.log("Errors: ", err))
       .finally(() => setLoading(false));
-  }, []);
-  console.log("data: ", data);
+  }, [setMovieData, setLoading]);
+  console.log("data: ", movieData);
   return (
     <>
       <Title />
-      <SearchBar searchTerm={searchTerm} updateData={getSearchTerm} />
-      <MovieCards movieData={data} searchTerm={searchTerm} loading={loading} />
+      <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
+      <MovieCards
+        movieData={movieData}
+        searchTerm={searchTerm}
+        loading={loading}
+      />
     </>
   );
 }
