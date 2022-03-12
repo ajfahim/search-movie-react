@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import MovieCards from "./components/MovieCards/MovieCards";
+import MovieCardsWrapper from "./components/MovieCardsWrapper/MovieCardsWrapper";
 import SearchBar from "./components/searchBar/SearchBar";
 import Title from "./components/Title/Title";
 
@@ -23,7 +23,6 @@ export default function App() {
       })
       .then((data) => {
         setMovieData(data.results);
-        console.log("DATA: ", data);
       })
       .catch((err) => console.log("Errors: ", err))
       .finally(() => setLoading(false));
@@ -33,7 +32,7 @@ export default function App() {
     <>
       <Title />
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-      <MovieCards
+      <MovieCardsWrapper
         movieData={movieData}
         searchTerm={searchTerm}
         loading={loading}
