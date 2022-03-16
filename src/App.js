@@ -22,12 +22,20 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
-        setMovieData(data.results);
+        if (searchTerm === "") {
+          setMovieData(data.results);
+        } else {
+          setMovieData(
+            movieData.filter((data) =>
+              data.title.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          );
+        }
       })
       .catch((err) => console.log("Errors: ", err))
       .finally(() => setLoading(false));
-  }, [setMovieData, setLoading]);
-  console.log("data: ", movieData);
+  }, [setMovieData, searchTerm]);
+
   return (
     <>
       <Title />
