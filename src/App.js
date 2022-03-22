@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import MovieCardsWrapper from "./components/MovieCardsWrapper/MovieCardsWrapper";
+import MovieCards from "./components/MovieCards/MovieCards.js";
 import SearchBar from "./components/searchBar/SearchBar";
 import Title from "./components/Title/Title";
 
@@ -45,7 +45,7 @@ export default function App() {
     <>
       <Title />
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-      <MovieCardsWrapper
+      <MovieCards
         filteredMovie={filteredMovie}
         searchTerm={searchTerm}
         loading={loading}
