@@ -8,6 +8,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filteredMovie, setFilteredMovie] = useState([]);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -22,26 +23,30 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
-        if (searchTerm === "") {
-          setMovieData(data.results);
-        } else {
-          setMovieData(
-            movieData.filter((data) =>
-              data.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-          );
-        }
+        setMovieData(data.results);
       })
       .catch((err) => console.log("Errors: ", err))
       .finally(() => setLoading(false));
-  }, [setMovieData, searchTerm]);
+  }, []);
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setFilteredMovie(movieData);
+    } else {
+      setFilteredMovie(
+        movieData.filter((data) =>
+          data.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+  }, [searchTerm, movieData]);
 
   return (
     <>
       <Title />
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
       <MovieCardsWrapper
-        movieData={movieData}
+        filteredMovie={filteredMovie}
         searchTerm={searchTerm}
         loading={loading}
       />

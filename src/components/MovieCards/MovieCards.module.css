@@ -1,18 +1,25 @@
 .cardContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   gap: 0.5rem;
-  border: 0.3rem cadetblue solid;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px #ccc;
+  height: 55rem;
 }
 .cardContainer > img {
   height: 40rem;
   width: 100%;
   object-fit: cover;
+  border-radius: 10px;
+  min-height: 640px;
+  max-height: 640px;
 }
 .title {
   color: rgb(83, 78, 78);
   font-weight: 900;
+  font-size: 1.5rem;
+  padding-left: 0.5rem;
 }
 .ratting {
   color: indianred;
@@ -22,7 +29,14 @@
 .ratting > span {
   font-weight: 700;
   font-size: 1rem;
+  padding-left: 0.5rem;
 }
 .description {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   color: rgb(129, 122, 122);
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

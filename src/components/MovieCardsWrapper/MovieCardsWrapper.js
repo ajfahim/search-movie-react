@@ -1,10 +1,10 @@
 import MovieCards from "../MovieCards/MovieCards";
 import styles from "./MovieCardsWrapper.module.css";
-function MovieCardsWrapper({ movieData, searchTerm, loading }) {
+function MovieCardsWrapper({ filteredMovie, searchTerm, loading }) {
   return (
     <div className={styles.movieCardWrapper}>
       <MovieCards
-        movieData={movieData}
+        filteredMovie={filteredMovie}
         searchTerm={searchTerm}
         loading={loading}
       />
